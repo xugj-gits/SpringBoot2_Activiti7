@@ -1,0 +1,42 @@
+spring:
+  #Activiti property configuration
+  activiti:
+    database-schema-update: true
+    job-executor-activate: true # asyncExecutorEnabled属性设置设置true后将代替那些老的Job executor
+    history-level: full
+    db-history-used: true
+    check-process-definitions: false # 自动部署验证设置:true-开启（默认）、false-关闭
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/reanod_workflow?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&nullCatalogMeansCurrent=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialization-mode: always
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+#    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+
+logging:
+  level:
+    com.ascendant: debug
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(-%5p)  %clr(${PID:- }){magenta} --- %clr([%15.15t]){faint} %highlight(%-80.80logger{300}){cyan} %clr(:) %m %n%wEx"
+
+
+swagger:
+  enabled: true
